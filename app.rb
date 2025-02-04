@@ -5,7 +5,7 @@ require "json"
 require "dotenv/load"
 
 get("/") do
-  api_url = "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
+  api_url = "https://api.exchangerate.host/list"
   raw_response = HTTP.get(api_url)
   parsed_data = JSON.parse(raw_response.to_s)
   
@@ -17,7 +17,7 @@ end
 get("/:from_currency") do
   @from_currency = params.fetch("from_currency")
   
-  api_url = "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
+  api_url = "https://api.exchangerate.host/list"
   raw_response = HTTP.get(api_url)
   parsed_data = JSON.parse(raw_response.to_s)
   
@@ -30,7 +30,7 @@ get("/:from_currency/:to_currency") do
   @from_currency = params.fetch("from_currency")
   @to_currency = params.fetch("to_currency")
   
-  api_url = "https://api.exchangerate.host/convert?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}&from=#{@from_currency}&to=#{@to_currency}&amount=1"
+  api_url = "https://api.exchangerate.host/convert?from=#{@from_currency}&to=#{@to_currency}&amount=1"
   raw_response = HTTP.get(api_url)
   parsed_data = JSON.parse(raw_response.to_s)
   
